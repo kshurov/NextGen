@@ -9,8 +9,18 @@ using TaskZero.Shared;
 
 namespace TaskZero.CommandStack.Sagas
 {
-    public class NotificationHandler : IHandleMessages<AddNewTaskNotifyCommand>, IHandleMessages<UpdateTaskNotifyCommand>
+    public class NotificationHandler : 
+        IHandleMessages<AddNewTaskNotifyCommand>, 
+        IHandleMessages<UpdateTaskNotifyCommand>,
+        IHandleMessages<ErrorNotifyCommand>
+
     {
+        public void Handle(ErrorNotifyCommand message)
+        {
+            var hub = new TaskZeroHub(message.SignalrConnectionId);
+            hub.NotifyResultOfErrork(message.TaskId, message.Error);
+        }
+
         public void Handle(AddNewTaskNotifyCommand message)
         {
             // Notify back 

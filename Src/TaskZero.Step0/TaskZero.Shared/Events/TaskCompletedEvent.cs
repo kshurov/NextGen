@@ -7,5 +7,9 @@ using System.Threading.Tasks;
 
 namespace TaskZero.Shared.Events
 {
-    public class TaskDeletedEvent : DomainEvent { public TaskDeletedEvent(Guid id) { TaskId = id; } public Guid TaskId { get; set; } }
+    public class TaskCompletedEvent : DomainEvent
+    {
+        public TaskCompletedEvent(Guid id) { TaskId = id; }
+        public Guid TaskId { get; set; }
+    }
 }

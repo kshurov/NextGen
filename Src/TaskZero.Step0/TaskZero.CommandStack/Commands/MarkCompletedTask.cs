@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TaskZero.CommandStack.Commands
 {
-    public class DeleteTaskCommand : NotifyCommand
+    public class MarkCompletedTask : NotifyCommand
     {
-        public DeleteTaskCommand(Guid id, string connectionId) : base(connectionId) { TaskId = id; }
+        public MarkCompletedTask(Guid id, string connectionId) : base(connectionId) { TaskId = id; }
         public Guid TaskId { get; set; }
     }
 }

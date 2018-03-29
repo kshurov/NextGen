@@ -24,11 +24,29 @@ namespace TaskZero.Server.Application
         public void QueueAddOrSaveTask(TaskInputModel input)
         {
             Command command; var isNewTask = (input.TaskId == Guid.Empty);
+            int r = new Random().Next(10);
+            if (r % 2 == 0)
+            {
+                SendCommand(new ErrorNotifyCommand(input.TaskId, "Ooopss!!", input.SignalrConnectionId));
+                return;
+            }
+
             if (isNewTask)
             {
                 command = new AddNewTaskCommand(input.Title, input.Description, input.DueDate, input.Priority, input.SignalrConnectionId);
             }
-            else { command = new UpdateTaskCommand(input.TaskId, input.Title, input.Description, input.DueDate, input.Priority, input.Status, input.SignalrConnectionId); }
+            else
+            {
+                command = new UpdateTaskCommand(input.TaskId, input.Title, input.Description, input.DueDate, input.Priority, input.Status, input.SignalrConnectionId);
+            }
+            SendCommand(command);
+        }
+
+        private void SendCommand(Command command)
+        {
+            
+            
+
             Bus.Send(command);
         }
         #endregion
@@ -36,12 +54,22 @@ namespace TaskZero.Server.Application
 
         public TaskViewModel GetTask(Guid id)
         {
-            var model = new TaskViewModel { Task = _manager.FindById(id) }; return model;
+            var model = new TaskViewModel { Task = _manager.FindById(id) };
+            return model;
         }
 
         public void QueueDeleteTask(Guid id, string signalrConnectionId)
         {
-            var command = new DeleteTaskCommand(id, signalrConnectionId); Bus.Send(command);
+            var command = new DeleteTaskCommand(id, signalrConnectionId);
+            SendCommand(command);
+        }
+
+        
+
+        internal void QueueCompleteTask(Guid id, string signalrConnectionId)
+        {
+            var command = new MarkCompletedTask(id, signalrConnectionId);
+            SendCommand(command);
         }
     }
 }

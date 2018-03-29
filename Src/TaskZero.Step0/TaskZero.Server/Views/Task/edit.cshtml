@@ -11,11 +11,19 @@
             taskZeroHub.client.notifyResultOfUpdateTask = function (taskId, title)
             {
                 var msg = "Task [" + title + "] updated successfully.";
-                Ybq.toast("#task-form-message", msg, true); };
+                Ybq.toast("#task-form-message", msg, true);
+            };
+            taskZeroHub.client.notifyResultOfError = function (taskId, error) {
+                var msg = error + " error";
+                Ybq.toast("#task-error-message", msg, true);
+            };
             // Start the SignalR client-side listener
-            $.connection.hub.start().done(function ()
-            { $("#signalrConnectionId").val($.connection.hub.id);
-            }); }); </script> }
+                $.connection.hub.start().done(function () {
+                $("#signalrConnectionId").val($.connection.hub.id);
+            });
+
+        });
+    </script> }
 
 @{ var dateForDisplay = Model.Task.DueDate.HasValue ? Model.Task.DueDate.Value.ToString("d MMM yyyy") : ""; } <div class="col-xs-12 col-lg-10 col-lg-offset-1">
     <h2> <a href="@Url.Action("index", "dashboard")"><i class="fa fa-list"></i></a> EDIT TASK <small class="text-muted hidden-xs">@Model.Task.TaskId</small> </h2> <div id="task-form-message" class="alert alert-info" style="display: none;"></div> <div class="margin-top-md">

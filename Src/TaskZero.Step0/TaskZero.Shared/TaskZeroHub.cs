@@ -20,5 +20,11 @@ namespace TaskZero.Shared
             var hubContext = GlobalHost.ConnectionManager.GetHubContext<TaskZeroHub>();
             hubContext.Clients.Client(_connectionId).notifyResultOfUpdateTask(taskId.ToString(), title);
         }
+
+        public void NotifyResultOfErrork(Guid taskId, string error)
+        {
+            var hubContext = GlobalHost.ConnectionManager.GetHubContext<TaskZeroHub>();
+            hubContext.Clients.Client(_connectionId).notifyResultOfError(taskId.ToString(), error);
+        }
     }
 }

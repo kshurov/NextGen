@@ -10,9 +10,22 @@ using TaskZero.CommandStack.Model;
 
 namespace TaskZero.CommandStack.Sagas
 {
-    public class ManageTaskSaga : Saga, IAmStartedBy<AddNewTaskCommand>, IHandleMessages<UpdateTaskCommand>, IHandleMessages<DeleteTaskCommand>
+    public class ManageTaskSaga : Saga, 
+        IAmStartedBy<AddNewTaskCommand>, 
+        IHandleMessages<UpdateTaskCommand>, 
+        IHandleMessages<DeleteTaskCommand>,
+        IHandleMessages<MarkCompletedTask>
     {
         public ManageTaskSaga(IBus bus, IEventStore eventStore, IRepository repository) : base(bus, eventStore, repository) { }
+
+        public void Handle(MarkCompletedTask message)
+        {
+            var task = Repository.GetById<Task>(message.TaskId);
+            task.MarkAsCompleted();
+            Repository.Save(task);
+
+        }
+
         public void Handle(AddNewTaskCommand message)
         {
             var task = Task.Factory.NewTaskFrom(message.Title, message.Description, message.DueDate, message.Priority);

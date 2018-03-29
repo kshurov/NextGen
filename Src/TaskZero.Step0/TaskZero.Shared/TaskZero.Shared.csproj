@@ -67,7 +67,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events\Class1.cs" />
+    <Compile Include="Events\TaskCompletedEvent.cs" />
+    <Compile Include="Events\TaskDeletedEvent.cs" />
+    <Compile Include="Events\TaskNoUpdatedEvent.cs" />
     <Compile Include="Events\TaskUpdatedEvent.cs" />
     <Compile Include="TaskZeroHub.cs" />
     <Compile Include="CommandResponse.cs" />
