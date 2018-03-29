@@ -31,11 +31,59 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Memento, Version=1.2.0.0, Culture=neutral, PublicKeyToken=bca5f6a4d14d06d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\MementoFX.1.2.0\lib\net451\Memento.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Memento.Messaging.Postie, Version=1.2.3.0, Culture=neutral, PublicKeyToken=75a7fd450051d0c2, processorArchitecture=MSIL">
+      <HintPath>..\packages\MementoFX.Messaging.Postie.1.2.3\lib\net451\Memento.Messaging.Postie.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Memento.Persistence.MongoDB, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MementoFX.Persistence.MongoDB.1.1.3\lib\net451\Memento.Persistence.MongoDB.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="MongoDB.Bson, Version=2.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.4.4\lib\net45\MongoDB.Bson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.2.4.4\lib\net45\MongoDB.Driver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.4.4\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AddNewTaskCommand.cs" />
+    <Compile Include="Commands\AddNewTaskNotifyCommand.cs" />
+    <Compile Include="Commands\DeleteTaskCommand.cs" />
+    <Compile Include="Commands\UpdateTaskCommand.cs" />
+    <Compile Include="Commands\UpdateTaskNotifyCommand.cs" />
+    <Compile Include="Commands\NotifyCommand.cs" />
+    <Compile Include="Model\Task.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sagas\NotificationHandler.cs" />
+    <Compile Include="Sagas\ManageTaskSaga.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TaskZero.Shared\TaskZero.Shared.csproj">
+      <Project>{5FF22EDF-C2CE-450D-8B76-4EE6E7968337}</Project>
+      <Name>TaskZero.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

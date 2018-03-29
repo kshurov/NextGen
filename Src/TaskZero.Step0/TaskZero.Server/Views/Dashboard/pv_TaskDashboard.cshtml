@@ -1,8 +1,11 @@
-﻿@model TaskZero.Server.Models.Home.TaskIndexViewModel
-@{
-    var pending = new List<string>();
-    var completed = new List<string>();
-}
+﻿@using TaskZero.Server.Common.Extensions
+@using TaskZero.Shared
+
+@model TaskZero.Server.Models.Home.TaskIndexViewModel
+@{ var pending = (from t in Model.Tasks
+                   where t.Status != Status.Completed
+                   orderby t.DueDateForDisplay()
+                   select t).ToList(); var completed = (from t in Model.Tasks where t.Status == Status.Completed orderby t.DueDate descending select t).ToList(); }
 
 <div>
     <ul class="nav nav-tabs" role="tablist">

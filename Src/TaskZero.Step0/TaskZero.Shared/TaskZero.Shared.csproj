@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Memento, Version=1.2.0.0, Culture=neutral, PublicKeyToken=bca5f6a4d14d06d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\MementoFX.1.2.0\lib\net451\Memento.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
@@ -63,7 +67,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\Class1.cs" />
+    <Compile Include="Events\TaskUpdatedEvent.cs" />
+    <Compile Include="TaskZeroHub.cs" />
     <Compile Include="CommandResponse.cs" />
+    <Compile Include="Events\TaskCreatedEvent.cs" />
     <Compile Include="Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Status.cs" />
